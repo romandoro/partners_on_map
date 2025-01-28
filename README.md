@@ -1,1 +1,0 @@
-# partners_on_map
