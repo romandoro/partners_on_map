@@ -85,7 +85,3 @@ L'applicazione consente di aggiungere, modificare ed eliminare i partner, visual
 
 **
 
-
-## Autore
-
-Roman Doroshenko
