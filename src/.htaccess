@@ -1,0 +1,2 @@
+# Blocca l'accesso ai file in questa cartella
+Deny from all

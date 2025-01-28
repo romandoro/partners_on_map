@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Font utilizzato */
+    background-color: #121212; /* Sfondo scuro */
+    color: #e0e0e0; /* Colore del testo */
+    overflow: hidden; /* Nasconde la barra di scorrimento orizzontale */
+}
+
+/* From Uiverse.io by Cksunandh */
+.login-container {
+    background-color: #2f2f2f;
+    border-radius: 8px;
+    box-shadow: rgb(31 31 31 / 17%) 0 -23px 25px 0 inset,
+    rgb(108 108 108 / 23%) 0 -36px 30px 0 inset,
+    rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset, rgba(0, 0, 0, 0.06) 0 2px 1px,
+    rgba(0, 0, 0, 0.09) 0 4px 2px, rgba(0, 0, 0, 0.09) 0 8px 4px,
+    rgba(0, 0, 0, 0.09) 0 16px 8px, rgba(0, 0, 0, 0.09) 0 32px 16px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: 100px auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.paragraph {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    background: none;
+    border: 1px solid #353535;
+    padding: 15px 23px;
+    font-size: 16px;
+    border-radius: 8px;
+    color: #979797;
+    width: 90%;
+    box-shadow: rgb(136 136 136 / 17%) 0 -23px 25px 0 inset,
+    rgb(81 81 81 / 23%) 0 -36px 30px 0 inset,
+    rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset, rgba(0, 0, 0, 0.06) 0 2px 1px,
+    rgba(0, 0, 0, 0.09) 0 4px 2px, rgba(0, 0, 0, 0.09) 0 8px 4px,
+    rgba(0, 0, 0, 0.09) 0 16px 8px, rgba(0, 0, 0, 0.09) 0 32px 16px;
+}
+
+.input-group input:focus {
+    border-color: #0173ed;
+    outline: none;
+}
+
+button {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0173ed;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0173ed;
+}
+
+.bottom-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.bottom-text a {
+    color: #0173ed;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.bottom-text a:hover {
+    color: #3f95f2;
+}
+
+.error-message {
+    color: #ff4d4d;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ff4d4d;
+    background-color: #ffe6e6;
+}
+
+
+.main-menu-container {
+    display: flex;
+    background-color: rgb(28, 73, 109);
+    width: 250px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgb(75, 75, 102);
+rgba(27, 133, 219, 0.5) 5px 10px 15px;
+    margin-bottom: 10px; /* Aggiungo margine per separarlo dal titolo */
+    margin-left: 70px; /* Aggiungo margin-left per spostare a destra */
+}
+

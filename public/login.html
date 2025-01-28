@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/css/login.css?v=1">
+  <title>Login</title>
+</head>
+<body>
+<div class="login-container">
+  <form class="login-form" id="loginForm" method="post" action="/src/php/auth/login">
+    <p class="heading">Login</p>
+    <p class="paragraph">Login to your account</p>
+    <div class="input-group">
+      <input
+              required=""
+              placeholder="Username"
+              id="username"
+              name="username"
+              type="text"
+      />
+    </div>
+    <div class="input-group">
+      <input
+              required=""
+              placeholder="Password"
+              name="password"
+              id="password"
+              type="password"
+      />
+    </div>
+    <input type="hidden" name="redirect_uri" value="<?php echo $_SERVER['HTTP_REFERER'] ?? '/' ?>">
+    <button type="submit">Login</button>
+    <div id="errorMessage" class="error-message" style="display: none;"></div>
+  </form>
+
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+
+
+    if (error) {
+      errorMessage.textContent = error;
+      errorMessage.style.display = 'block';
+    }
+
+
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // Impedisci il submit standard del form
+
+      const formData = new FormData(loginForm);
+
+      fetch('/src/php/auth/login.php', {
+        method: 'POST',
+        body: formData
+      })
+              .then(response => {
+                if (!response.ok) {
+                  return Promise.reject("Errore durante la richiesta, server non raggiungibile");
+                }
+
+                return response.text(); // Leggi la risposta come testo
+              })
+              .then(data => {
+                try {
+                  const jsonData = JSON.parse(data);
+                  if (jsonData.success) {
+                    // Se il login ha successo, reindirizza alla home o a /manage-partners
+                    window.location.href = jsonData.redirect_uri;
+                  } else {
+                    // Altrimenti, mostra il messaggio di errore
+                    errorMessage.textContent = jsonData.message;
+                    errorMessage.style.display = 'block';
+                  }
+                } catch (e) {
+                  // Se la risposta non è JSON, la ricarico in caso di errore
+                  console.error('Errore durante la richiesta:', data);
+                  window.location.reload();
+                }
+              })
+              .catch(error => {
+                console.error('Errore durante la richiesta:', error);
+                errorMessage.textContent = error;
+                errorMessage.style.display = 'block';
+              });
+    });
+  });
+</script>
+</body>
+</html>

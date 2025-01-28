@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Map</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link href=" https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.33.1/dist/tagify.min.css " rel="stylesheet">
+</head>
+<body>
+<div class="dashboard">
+    <div class="top-section">
+        <!-- Form per aggiungere un nuovo partner -->
+        <div class="form-container">
+            <h2>Aggiungi un Nuovo Partner</h2>
+            <form id="partnerForm">
+                <!-- Gruppo: Nome e Indirizzo -->
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" placeholder="Inserisci il nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="street">Indirizzo:</label>
+                    <input type="text" id="street" name="street" placeholder="Inserisci l'indirizzo">
+                </div>
+
+                <!-- Gruppo: CAP, Città, Paese -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="zip_code">CAP:</label>
+                        <input type="text" id="zip_code" name="zip_code" placeholder="Inserisci il CAP">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Città:</label>
+                        <input type="text" id="city" name="city" placeholder="Inserisci la città">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Paese:</label>
+                        <input type="text" id="country" name="country" placeholder="Inserisci il paese">
+                    </div>
+                </div>
+
+                <!-- Gruppo: Lingua e Partita IVA -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="language">Lingua:</label>
+                        <input type="text" id="language" name="language" placeholder="Inserisci la lingua">
+                    </div>
+                    <div class="form-group">
+                        <label for="partita_iva">Partita IVA:</label>
+                        <input type="text" id="partita_iva" name="partita_iva" placeholder="Inserisci la partita IVA">
+                    </div>
+                </div>
+
+                <!-- Gruppo: Email e Sito Web -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Inserisci l'email">
+                    </div>
+                    <div class="form-group">
+                        <label for="web_site">Sito Web:</label>
+                        <input type="text" id="web_site" name="web_site" placeholder="Inserisci il sito web">
+                    </div>
+                </div>
+
+                <!-- Gruppo: Telefono e Province -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Telefono:</label>
+                        <input type="text" id="phone" name="phone" placeholder="Inserisci il telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="provinces">Province:</label>
+                        <input type="text" id="provinces" name="provinces" placeholder="Seleziona le province">
+                    </div>
+                </div>
+                <!-- Pulsanti per l'invio e l'annullamento del form -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">Aggiungi Partner</button>
+                    <button type="button" class="btn-cancel">Annulla</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sezione per visualizzare le informazioni del partner selezionato -->
+        <div class="client-info">
+            <div class="theme-toggle-container">
+                <button id="theme-toggle" class="theme-toggle-btn">🌙</button>
+            </div>
+            <!-- From Uiverse.io by akshat-patel28 -->
+            <div class="main-menu-container">
+                <a href="/">
+                    <button class="main-menu-button">
+                        <svg class="main-menu-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 10.77v-1.54l9-5.76 9 5.76v1.54a3 3 0 0 1 0 6v.75a3 3 0 0 1-1.42 2.58l-.81.49-1.3.78a1 1 0 0 1-1 0l-1.3-.78-.8-.49A3 3 0 0 1 3 17.51v-.75a3 3 0 0 1 0-6zm6-4.02 6 3.84v5.93l-6-3.84v-5.93zm-6 12.13v-4.72l6 3.84v.88a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2zm12 0v-4.72l6 3.84v.88a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"></path>
+                        </svg>
+                    </button>
+                </a>
+                <a href="/manage-partners">
+                    <button class="main-menu-button">
+                        <svg class="main-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </a>
+                <a href="/logout">
+                    <button class="main-menu-button">
+                        <svg class="main-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v-3a2 2 0 01-2-2H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v6"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+            <h2>Informazioni sul Partner Selezionato</h2>
+            <div class="info-content">
+                <p class="select-message">Seleziona un partner per visualizzare i dettagli.</p>
+            </div>
+            <div class="actions">
+                <div class="delete-container" >
+                    <button class="btn-delete">ELIMINA</button>
+                    <div class="delete-confirmation" style="display: none;">
+                        <p class="confirmation-message"></p>
+                        <input type="text" class="delete-input" placeholder="Scrivi DELETE per confermare">
+                        <div class="delete-buttons">
+                            <button class="btn-confirm-delete">OK</button>
+                            <button class="btn-cancel-delete">Annulla</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-update">MODIFICA</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione per visualizzare la lista dei partner -->
+    <div class="bottom-section">
+        <div class="partner-list">
+            <h2>Lista dei Partner</h2>
+            <div class="scrollable-list" id="partnersList">
+                <!-- La lista dei partner verrà caricata qui -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src=" https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.33.1/dist/tagify.min.js "></script>
+<script src="/public/js/switch_theme.js" defer></script>
+<script>
+    // Variabile per tracciare lo stato del form (aggiunta o modifica)
+    let isEditing = false;
+    let currentPartnerId = null; // Variabile per l'ID del partner in modifica
+    let currentPartner = null;  // Variabile per salvare le informazioni sul partner corrente
+
+
+    const partnerListDiv = document.querySelector('.scrollable-list');
+    const infoContentDiv = document.querySelector('.info-content');
+    let activePartner = null;
+    let partners = [];
+    // Funzione caricamento dei partners
+    function loadPartners() {
+        fetch('/src/php/partners/get_partners.php')
+            .then(response => response.json())
+            .then(data => {
+                partners = data;
+                updatePartnersList();
+
+            })
+            .catch(error => console.error('Errore durante il caricamento dei partner:', error));
+    }
+
+
+    function updatePartnersList() {
+        partnerListDiv.innerHTML = ''; // Pulisce la lista
+
+        partners.forEach(partner => {
+            const partnerCard = document.createElement('div');
+            partnerCard.className = 'partner-card';
+            if (activePartner && activePartner.name === partner.name) {
+                partnerCard.classList.add('selected');
+            }
+            partnerCard.innerHTML = `
+                <h3>${partner.name}</h3>
+                <p>${partner.city}</p>
+            `;
+            partnerCard.addEventListener('click', function () {
+                if (isEditing) {
+                    if (confirm('Attenzione: hai modifiche non salvate. Vuoi abbandonare?')) {
+                        resetForm();
+                        activePartner = partner;
+                        highlightPartner(partnerCard);
+                        updateClientInfo(partner);
+                        updatePartnersList();
+                    }
+                } else {
+                    activePartner = partner;
+                    highlightPartner(partnerCard);
+                    updateClientInfo(partner);
+                    updatePartnersList();
+                }
+            });
+            partnerListDiv.appendChild(partnerCard);
+        });
+    }
+
+    function loadClientInfo(partner) {
+        infoContentDiv.classList.add('loading');
+
+        setTimeout(() => {
+            infoContentDiv.innerHTML = `
+                <h3>${partner.name}</h3>
+                <p><strong>Indirizzo:</strong> ${partner.street}, ${partner.zip_code} ${partner.city}</p>
+                <p><strong>Province:</strong> ${partner.provinces.join(', ')}</p>
+                <p><strong>Nazione:</strong> ${partner.country}</p>
+                <p><strong>Telefono:</strong> ${partner.phone}</p>
+                <p><strong>Email:</strong> ${partner.email}</p>
+                <p><strong>Sito Web:</strong> ${partner.web_site}</p>
+            `;
+            infoContentDiv.classList.remove('loading');
+        }, 300);
+    }
+    // Funzione per evidenziare il partner selezionato nella lista
+    function highlightPartner(partnerCard) {
+        document.querySelectorAll('.partner-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        partnerCard.classList.add('selected');
+    }
+    // Aggiorno info dei partner
+    function updateClientInfo(partner) {
+        const infoContent = document.querySelector('.info-content');
+        infoContent.innerHTML = `
+         <h3>${partner.name}</h3>
+        <p><strong>Indirizzo:</strong> ${partner.street}, ${partner.zip_code} ${partner.city}</p>
+          <p><strong>Province:</strong> ${partner.provinces.join(', ')}</p>
+           <p><strong>Paese:</strong> ${partner.country}</p>
+           <p><strong>Telefono:</strong> ${partner.phone}</p>
+           <p><strong>Email:</strong> ${partner.email}</p>
+           <p><strong>Sito Web:</strong> ${partner.web_site}</p>
+          `;
+        // Mostra i pulsanti ELIMINA e MODIFICA
+        const actions = document.querySelector('.actions');
+        actions.style.display = 'flex';
+
+        // Gestione del click sul pulsante MODIFICA
+        const updateButton = document.querySelector('.btn-update');
+        updateButton.onclick = function () {
+            prefillForm(partner);
+        };
+        // Memorizza l'ID del partner selezionato
+        currentPartnerId = partner.id;
+        currentPartner = partner; // Memorizza l'oggetto partner corrente
+
+        // Ottieni l'elemento del contenitore della conferma di eliminazione
+        const deleteContainer = document.querySelector('.delete-container');
+        const deleteConfirmation = deleteContainer.querySelector('.delete-confirmation');
+        const deleteButton = deleteContainer.querySelector('.btn-delete');
+        const confirmationMessage = deleteContainer.querySelector('.confirmation-message');
+
+        // Aggiungi l'event listener al pulsante ELIMINA
+        deleteButton.onclick = function () {
+            // Visualizza il messaggio di conferma
+            confirmationMessage.textContent = `Sei sicuro di voler eliminare il partner "${partner.name}"?`;
+            deleteConfirmation.style.display = 'block';
+        };
+
+        // Ottieni gli elementi per la conferma di eliminazione
+        const confirmDeleteButton = deleteContainer.querySelector('.btn-confirm-delete');
+        const deleteInput = deleteContainer.querySelector('.delete-input');
+
+        // Aggiungi l'event listener per il pulsante OK
+        confirmDeleteButton.onclick = function() {
+            if(deleteInput.value === 'DELETE') {
+                deletePartner(partner.id);
+                deleteConfirmation.style.display = 'none';
+                deleteInput.value = '';
+            } else {
+                alert('Inserisci "DELETE" per confermare l\'eliminazione');
+            }
+        };
+        // Ottieni l'elemento del pulsante ANNULLA
+        const cancelDeleteButton = deleteContainer.querySelector('.btn-cancel-delete');
+        // Aggiungi l'event listener per il pulsante ANNULLA
+        cancelDeleteButton.onclick = function () {
+            // Nasconde il messaggio di conferma
+            deleteConfirmation.style.display = 'none';
+            deleteInput.value = '';
+        };
+    }
+
+    // Funzione per precompilare il form con i dati del partner
+    function prefillForm(partner) {
+        // Cambia il testo del pulsante da "Aggiungi Partner" a "Aggiorna Partner"
+        const submitButton = document.querySelector('.btn-submit');
+        submitButton.textContent = 'Aggiorna Partner';
+        // Imposta lo stato de modifica a true
+        isEditing = true;
+        document.getElementById('name').value = partner.name || '';
+        document.getElementById('street').value = partner.street || '';
+        document.getElementById('zip_code').value = partner.zip_code || '';
+        document.getElementById('city').value = partner.city || '';
+        document.getElementById('country').value = partner.country || '';
+        document.getElementById('language').value = partner.language || '';
+        document.getElementById('partita_iva').value = partner.partita_iva || '';
+        document.getElementById('email').value = partner.email || '';
+        document.getElementById('web_site').value = partner.web_site || '';
+        document.getElementById('phone').value = partner.phone || '';
+        // Imposta le province nel tagify
+        tagify.removeAllTags(); // Rimuove i tag esistenti
+        if (partner.provinces && partner.provinces.length > 0) {
+            const provinceTags = partner.provinces.map(provinceName => {
+                const province = tagify.settings.whitelist.find(item => item.value === provinceName);
+                return province ? { id: province.id, value: province.value } : null;
+            }).filter(Boolean); // Rimuove i valori nulli
+            tagify.addTags(provinceTags); // Aggiunge i tag delle province
+        }
+    }
+
+    // Funzione per eliminare un partner
+    function deletePartner(partnerId) {
+        fetch('/src/php/partners/delete_partner.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ partner_id: partnerId }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Partner eliminato con successo!');
+                    loadPartners();
+                    // Resetta le informazioni mostrate a schermo dopo l'eliminazione
+                    const infoContent = document.querySelector('.info-content');
+                    infoContent.innerHTML = `<p class="select-message">Seleziona un partner per visualizzare i dettagli.</p>`;
+                    const actions = document.querySelector('.actions');
+                    actions.style.display = 'none';
+                } else {
+                    alert('Errore: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Errore:', error));
+    }
+    // Inizializza Tagify per l'input delle province
+    const input = document.querySelector('#provinces');
+    const tagify = new Tagify(input, {
+        enforceWhitelist: true,
+        whitelist: [],
+        dropdown: {
+            enabled: 1,
+            maxItems: 10,
+            closeOnSelect: false
+        }
+    });
+    // Carica le province dal database
+    fetch('/src/php/partners/get_provinces.php')
+        .then(response => response.json())
+        .then(data => {
+            const provinces = data.map(province => ({
+                id: province.id,
+                value: province.prov_name
+            }));
+            tagify.settings.whitelist = provinces;
+        })
+        .catch(error => console.error('Errore durante il caricamento delle province:', error));
+    // Gestione dell'invio del form
+    document.getElementById('partnerForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Ottiene i dati dal form e li valida
+        const formData = new FormData(this);
+        const name = formData.get('name').trim();
+        const street = formData.get('street').trim();
+        const zip_code = formData.get('zip_code').trim();
+        const city = formData.get('city').trim();
+        const country = formData.get('country').trim();
+        const language = formData.get('language').trim();
+        const partita_iva = formData.get('partita_iva').trim();
+        const email = formData.get('email').trim();
+        const web_site = formData.get('web_site').trim();
+        const phone = formData.get('phone').trim();
+        const provinces = tagify.value.map(item => item.id); // Ottiene gli ID delle province selezionate
+
+
+        // Verifica se il CAP è un numero valido
+        if (zip_code && isNaN(zip_code)) {
+            alert('Il CAP deve essere un valore numerico.');
+            return;
+        }
+        // Verifica se è stata selezionata almeno una provincia
+        if (provinces.length === 0) {
+            alert('Seleziona almeno una provincia.');
+            return;
+        }
+        // Aggiorna i dati nel form con i valori validati
+        formData.set('name', name);
+        formData.set('street', street);
+        formData.set('zip_code', zip_code);
+        formData.set('city', city);
+        formData.set('country', country);
+        formData.set('language', language);
+        formData.set('partita_iva', partita_iva);
+        formData.set('email', email);
+        formData.set('web_site', web_site);
+        formData.set('phone', phone);
+        formData.append('provinces', JSON.stringify(provinces)); // Aggiunge l'array di province
+
+        // Aggiunge l'ID del partner al form se è in modalità modifica
+        if (isEditing) {
+            formData.append('partner_id', currentPartnerId);
+        }
+
+        let url;
+        if (isEditing) {
+            url = '/src/php/partners/update_partner.php';
+        } else {
+            url = '/src/php/partners/save_partner.php';
+        }
+
+        // Invia i dati al server
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    alert(isEditing ? 'Partner aggiornato con successo!' : 'Partner aggiunto con successo!');
+                    resetForm();
+                    loadPartners();
+                    isEditing = false;
+                    const submitButton = document.querySelector('.btn-submit');
+                    submitButton.textContent = 'Aggiungi Partner';
+                } else {
+                    alert('Errore: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Errore:', error));
+    });
+    // Funzione reset form
+    function resetForm() {
+        document.getElementById('partnerForm').reset();
+        isEditing = false;
+        const submitButton = document.querySelector('.btn-submit');
+        submitButton.textContent = 'Aggiungi Partner';
+        tagify.removeAllTags();
+    }
+    // Gestione del click sul pulsante ANNULLA
+    const cancelButton = document.querySelector('.btn-cancel');
+    cancelButton.addEventListener('click', function () {
+        resetForm()
+    });
+
+    // carico dati
+    loadPartners();
+</script>
+</body>
+</html>
